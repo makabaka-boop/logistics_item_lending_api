@@ -1,0 +1,44 @@
+server:
+  port: 8011
+
+spring:
+  application:
+    name: logistics-item-lending-api
+  datasource:
+    url: jdbc:h2:file:/data/logistics;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+
+app:
+  auth:
+    username: admin
+    password: admin123
+    token: logistics-token-2026
+  rules:
+    overdue-days: 7        # 逾期天数阈值
+    abnormal-streak: 3     # 同一责任人连续异常归还阈值
+    low-stock-ratio: 0.2   # 库存预警比例（可借数量低于总量的 20%）
+    repair-review-hours: 24 # 维修完成后超过此小时数仍未复核视为异常

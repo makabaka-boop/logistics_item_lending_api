@@ -1,0 +1,16 @@
+services:
+  logistics-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: logistics-item-lending-api:1.0.0
+    container_name: logistics-item-lending-api
+    restart: unless-stopped
+    ports:
+      - "8011:8011"
+    volumes:
+      # 持久化 H2 数据库文件
+      - ./data:/data
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_PROFILES_ACTIVE=default
