@@ -1,0 +1,17 @@
+services:
+  item-lending-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.aliyun
+    container_name: logistics-item-lending-api
+    ports:
+      - "8011:8011"
+    volumes:
+      - item-lending-data:/data
+    environment:
+      - JAVA_OPTS=-Xmx512m -Xms256m
+    restart: unless-stopped
+
+volumes:
+  item-lending-data:
+    name: logistics-item-lending-data
